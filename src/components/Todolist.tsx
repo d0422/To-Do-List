@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
 `;
 const TodoContainer = styled.div`
@@ -33,11 +33,12 @@ const Btn = styled.div`
   justify-content: center;
   border-radius: 10px;
   border-style: solid;
+
   padding: 10px;
   border-width: 1px;
 `;
 const Select = styled.select`
-  font-size: 20px;
+  font-size: 30px;
 `;
 const Todolist = () => {
   const toDos = useRecoilValue(toDoSelector);
@@ -49,7 +50,16 @@ const Todolist = () => {
   const options = useRecoilValue(categories);
   return (
     <div>
-      <Title>To Dos</Title>
+      <Container>
+        <Title>To Dos</Title>
+        <Btn
+          onClick={() => {
+            setPluscat((prev) => !prev);
+          }}
+        >
+          Add Cat
+        </Btn>
+      </Container>
       {pluscat ? <CreateNewCategories></CreateNewCategories> : ""}
       <Container>
         <form>
@@ -60,13 +70,6 @@ const Todolist = () => {
           </Select>
         </form>
         <CreateToDo></CreateToDo>
-        <Btn
-          onClick={() => {
-            setPluscat((prev) => !prev);
-          }}
-        >
-          Add Cat
-        </Btn>
       </Container>
 
       <TodoContainer>
